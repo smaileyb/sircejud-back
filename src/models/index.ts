@@ -1,3 +1,8 @@
+import { Ruling } from './Ruling'
 import { User } from './User'
 
-export { User }
+User.hasMany(Ruling)
+
+Ruling.belongsTo(User)
+
+export { User, Ruling }
