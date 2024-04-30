@@ -6,6 +6,7 @@ import { ensureAuthentication } from './middlewares/auth'
 const router = express.Router()
 
 router.get('/rulings', ensureAuthentication, rulingsController.index)
+router.post('/rulings', ensureAuthentication, rulingsController.create)
 
 router.post('/auth/register', authController.register)
 router.post('/auth/login', authController.login)
