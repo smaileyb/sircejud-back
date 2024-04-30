@@ -1,4 +1,6 @@
 'use strict'
+const bcrypt = require('bcrypt')
+const { where } = require('sequelize')
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -8,7 +10,7 @@ module.exports = {
         {
           name: 'Smailey',
           email: 'smailey.behm@gmail.com',
-          password: 'smailey',
+          password: await bcrypt.hash('smailey', 10),
           role: 'admin',
           created_at: new Date(),
           updated_at: new Date()
@@ -16,7 +18,7 @@ module.exports = {
         {
           name: 'Vanessa',
           email: 'vbs@tjpr.jus.br',
-          password: 'vbs',
+          password: await bcrypt.hash('vbs', 10),
           role: 'admin',
           created_at: new Date(),
           updated_at: new Date()
@@ -27,6 +29,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('users', null, {})
+    await queryInterface.bulkDelete('users', null, { where: { role: 'admin' } })
   }
 }
