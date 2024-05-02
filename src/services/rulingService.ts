@@ -29,11 +29,21 @@ export const rulingService = {
     })
     return updatedRulings[0]
   },
-  deleteById: async () => {},
+  deleteById: async (rulingId: number) => {
+    await Ruling.destroy({ where: { id: rulingId } })
+  },
   findByTitle: async (title: string) => {
     const ruling = await Ruling.findOne({
       where: {
         title
+      }
+    })
+    return ruling
+  },
+  findById: async (id: number) => {
+    const ruling = await Ruling.findOne({
+      where: {
+        id
       }
     })
     return ruling

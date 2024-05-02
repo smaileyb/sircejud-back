@@ -40,6 +40,11 @@ export const rulingsController = {
     const { id } = request.params
     const { title, content } = request.body
     try {
+      const rulingExists = await rulingService.findById(Number(id))
+      if (!rulingExists)
+        throw new Error(
+          'Não há entendimento cadastrado com o identificador informado.'
+        )
       const updatedRuling = await rulingService.updateById(Number(id), {
         title,
         content
@@ -51,5 +56,21 @@ export const rulingsController = {
     }
   },
   // DELETE /rulings/:id
-  delete: async (request: AuthenticatedRequest, response: Response) => {}
+  delete: async (request: AuthenticatedRequest, response: Response) => {
+    const { id } = request.params
+
+    try {
+      const rulingExists = await rulingService.findById(Number(id))
+      if (!rulingExists)
+        throw new Error(
+          'Não há entendimento cadastrado com o identificador informado.'
+        )
+
+      await rulingService.deleteById(Number(id))
+      return response.status(204).send()
+    } catch (error) {
+      if (error instanceof Error)
+        return response.status(400).json({ message: error.message })
+    }
+  }
 }
