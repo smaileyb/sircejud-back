@@ -16,7 +16,19 @@ export const rulingService = {
     const newRuling = Ruling.create(attributes)
     return newRuling
   },
-  updateById: async () => {},
+  updateById: async (
+    rulingId: number,
+    newAttributes: {
+      title: string
+      content: string
+    }
+  ) => {
+    const [affectedRows, updatedRulings] = await Ruling.update(newAttributes, {
+      where: { id: rulingId },
+      returning: true
+    })
+    return updatedRulings[0]
+  },
   deleteById: async () => {},
   findByTitle: async (title: string) => {
     const ruling = await Ruling.findOne({
