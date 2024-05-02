@@ -25,5 +25,16 @@ export const userService = {
       returning: true
     })
     return updatedUsers[0]
+  },
+  updatePassword: async (userId: number, password: string) => {
+    const [affectedRows, updatedUsers] = await User.update(
+      { password },
+      {
+        where: { id: userId },
+        returning: true,
+        individualHooks: true
+      }
+    )
+    return updatedUsers[0]
   }
 }
