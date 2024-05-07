@@ -9,7 +9,7 @@ app.use(cors())
 app.use(express.static('public'))
 app.use(express.json())
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3030
 
 app.use(router)
 

@@ -35,6 +35,18 @@ export const rulingsController = {
         return response.status(400).json({ message: error.message })
     }
   },
+  // GET /rulings
+  getOne: async (request: AuthenticatedRequest, response: Response) => {
+    const { id } = request.params
+    try {
+      const oneRuling = await rulingService.findById(Number(id))
+      if (!response.status(200)) throw new Error('Entendimento não encontrado.')
+      return response.status(200).json(oneRuling)
+    } catch (error) {
+      if (error instanceof Error)
+        return response.status(400).json({ message: error.message })
+    }
+  },
   // PUT /rulings/:id
   update: async (request: AuthenticatedRequest, response: Response) => {
     const { id } = request.params
