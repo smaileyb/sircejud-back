@@ -15,6 +15,7 @@ router.delete('/rulings/:id', ensureAuthentication, rulingsController.delete)
 router.post('/auth/register', authController.register)
 router.post('/auth/login', authController.login)
 
+router.get('/user', ensureAuthentication, userController.loggedUser)
 router.put('/user/update', ensureAuthentication, userController.update)
 router.put(
   '/user/update/password',

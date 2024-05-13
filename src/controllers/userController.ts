@@ -3,7 +3,18 @@ import { AuthenticatedRequest } from '../middlewares/auth'
 import { userService } from '../services/userService'
 
 export const userController = {
-  // PUT /users/current
+  // GET /user
+  loggedUser: async (request: AuthenticatedRequest, response: Response) => {
+    const user = request.user!
+    try {
+      if (!user) throw new Error('Atualmente não há usuário logado.')
+      return response.status(200).json(user)
+    } catch (error) {
+      if (error instanceof Error)
+        return response.status(400).json({ message: error.message })
+    }
+  },
+  // PUT /user/current
   update: async (request: AuthenticatedRequest, response: Response) => {
     const userId = request.user!.id
     const { name, email } = request.body
@@ -18,7 +29,7 @@ export const userController = {
         return response.status(400).json({ message: error.message })
     }
   },
-  // PUT /users/current/password
+  // PUT /user/current/password
   updatePassword: async (request: AuthenticatedRequest, response: Response) => {
     const user = request.user!
     console.log(user)

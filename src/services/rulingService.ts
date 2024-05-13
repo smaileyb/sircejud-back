@@ -21,6 +21,7 @@ export const rulingService = {
     newAttributes: {
       title: string
       content: string
+      userId: number
     }
   ) => {
     const [affectedRows, updatedRulings] = await Ruling.update(newAttributes, {

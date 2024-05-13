@@ -49,6 +49,7 @@ export const rulingsController = {
   },
   // PUT /rulings/:id
   update: async (request: AuthenticatedRequest, response: Response) => {
+    const userId = request.user!.id
     const { id } = request.params
     const { title, content } = request.body
     try {
@@ -59,7 +60,8 @@ export const rulingsController = {
         )
       const updatedRuling = await rulingService.updateById(Number(id), {
         title,
-        content
+        content,
+        userId
       })
       return response.status(200).json(updatedRuling)
     } catch (error) {
