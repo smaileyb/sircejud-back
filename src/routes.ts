@@ -3,6 +3,7 @@ import { rulingsController } from './controllers/RulingsController'
 import { authController } from './controllers/authController'
 import { ensureAuthentication } from './middlewares/auth'
 import { userController } from './controllers/userController'
+import { topicsController } from './controllers/TopicsController'
 
 const router = express.Router()
 
@@ -11,6 +12,8 @@ router.post('/rulings', ensureAuthentication, rulingsController.create)
 router.get('/rulings/:id', ensureAuthentication, rulingsController.getOne)
 router.put('/rulings/:id', ensureAuthentication, rulingsController.update)
 router.delete('/rulings/:id', ensureAuthentication, rulingsController.delete)
+
+router.post('/rulings/:id/topic', ensureAuthentication, topicsController.create)
 
 router.post('/auth/register', authController.register)
 router.post('/auth/login', authController.login)

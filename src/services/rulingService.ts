@@ -1,4 +1,4 @@
-import { Ruling } from '../models'
+import { Ruling, Topic, User } from '../models'
 import { RulingCreationAttributes } from '../models/Ruling'
 
 export const rulingService = {
@@ -47,10 +47,14 @@ export const rulingService = {
         id
       },
       attributes: ['id', 'title', 'content', 'createdAt', 'updatedAt'],
-      include: {
-        association: 'User',
-        attributes: ['name']
-      }
+      include: [
+        { model: User, as: 'User', attributes: ['name'] },
+        {
+          model: Topic,
+          as: 'Topics',
+          attributes: ['id', 'title', 'content', 'createdAt', 'updatedAt']
+        }
+      ]
     })
     return ruling
   }
