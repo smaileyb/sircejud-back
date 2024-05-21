@@ -45,6 +45,11 @@ export const rulingService = {
     const ruling = await Ruling.findOne({
       where: {
         id
+      },
+      attributes: ['id', 'title', 'content', 'createdAt', 'updatedAt'],
+      include: {
+        association: 'User',
+        attributes: ['name']
       }
     })
     return ruling
