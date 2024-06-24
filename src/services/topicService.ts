@@ -11,7 +11,6 @@ export const topicService = {
     newAttributes: {
       title: string
       content: string
-      userId: number
     }
   ) => {
     const [affectedRows, updatedTopics] = await Topic.update(newAttributes, {

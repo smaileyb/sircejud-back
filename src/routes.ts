@@ -14,6 +14,12 @@ router.put('/rulings/:id', ensureAuthentication, rulingsController.update)
 router.delete('/rulings/:id', ensureAuthentication, rulingsController.delete)
 
 router.post('/rulings/:id/topic', ensureAuthentication, topicsController.create)
+router.put('/rulings/topic/:id', ensureAuthentication, topicsController.update)
+router.delete(
+  '/rulings/topic/:id',
+  ensureAuthentication,
+  topicsController.delete
+)
 
 router.post('/auth/register', authController.register)
 router.post('/auth/login', authController.login)
