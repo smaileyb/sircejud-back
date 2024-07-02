@@ -63,7 +63,8 @@ export const User = database.define<UserInstance, User>(
           user.password = await bcrypt.hash(user.password.toString(), 10)
         }
       }
-    }
+    },
+    tableName: 'users'
   }
 )
 
