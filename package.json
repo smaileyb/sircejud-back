@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
-    "build": "tsc",
+    "build": "tsc && npx sequelize db:migrate",
     "start": "node ./dist/server.js"
   },
   "author": "Smailey",
