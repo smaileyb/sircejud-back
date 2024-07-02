@@ -1,8 +1,11 @@
 import { database } from '../database'
 import { DataTypes, Model, Optional } from 'sequelize'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
-type CheckPasswordCallback = (error: Error | undefined, isSame: boolean) => void
+type CheckPasswordCallback = (
+  error: Error | undefined | null,
+  isSame: boolean
+) => void
 
 export interface User {
   id: number
