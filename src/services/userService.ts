@@ -2,6 +2,25 @@ import { User } from '../models'
 import { UserCreationAttributes } from '../models/User'
 
 export const userService = {
+  isEmailAuthorized: async (email: string) => {
+    const preAuthorizedUsers = [
+      'smailey.behm@gmail.com',
+      'vbs@tjpr.jus.br',
+      'julianabeckerquirino@gmail.com',
+      'leofds@gmail.com',
+      'gianluca.pezzini@gmail.com',
+      'robert.tomal.1@gmail.com',
+      'paulobielen@gmail.com',
+      'jamilebaruki@gmail.com',
+      'suelenluczynskiflorentino@gmail.com'
+    ]
+    const isInTheList = preAuthorizedUsers.find(
+      userEmail => userEmail === email
+    )
+    console.log(isInTheList)
+
+    return isInTheList
+  },
   findByEmail: async (email: string) => {
     const user = await User.findOne({
       attributes: ['id', 'name', 'email', 'password'],

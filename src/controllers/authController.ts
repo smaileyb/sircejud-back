@@ -3,13 +3,31 @@ import { userService } from '../services/userService'
 import { jwtService } from '../services/jwtService'
 
 export const authController = {
+  checkEmail: async (request: Request, response: Response) => {
+    const { email } = request.body
+
+    try {
+      const userAlreadyExists = await userService.findByEmail(email)
+      if (userAlreadyExists) throw new Error('Este e-mail já está cadastrado.')
+
+      const isAuthorized = await userService.isEmailAuthorized(email)
+
+      if (isAuthorized === undefined)
+        throw new Error(
+          'Você não tem autorização para se registrar no sistema, entre em contato com o administrador.'
+        )
+      return response.status(202).json(isAuthorized)
+    } catch (error) {
+      if (error instanceof Error)
+        return response.status(400).json({ message: error.message })
+    }
+  },
+
   // POST /auth/register
   register: async (request: Request, response: Response) => {
     const { name, email, password } = request.body
 
     try {
-      const userAlreadyExists = await userService.findByEmail(email)
-      if (userAlreadyExists) throw new Error('Este e-mail já está cadastrado.')
       const user = await userService.create({
         name,
         email,
