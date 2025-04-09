@@ -20,7 +20,7 @@ module.exports = {
       },
       ruling_id: {
         allowNull: false,
-        type: Sequelize.DataTypes.INTEGER,
+        type: Sequelize.UUID,
         references: { model: 'rulings', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
