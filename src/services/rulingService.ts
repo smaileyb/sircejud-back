@@ -17,7 +17,7 @@ export const rulingService = {
     return newRuling
   },
   updateById: async (
-    rulingId: number,
+    rulingId: string,
     newAttributes: {
       title: string
       content: string
@@ -30,7 +30,7 @@ export const rulingService = {
     })
     return updatedRulings[0]
   },
-  deleteById: async (rulingId: number) => {
+  deleteById: async (rulingId: string) => {
     await Ruling.destroy({ where: { id: rulingId } })
   },
   findByTitle: async (title: string) => {
@@ -41,7 +41,7 @@ export const rulingService = {
     })
     return ruling
   },
-  findById: async (id: number) => {
+  findById: async (id: string) => {
     const ruling = await Ruling.findOne({
       where: {
         id

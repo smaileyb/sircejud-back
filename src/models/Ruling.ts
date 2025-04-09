@@ -2,7 +2,7 @@ import { DataTypes, Model, Optional } from 'sequelize'
 import { database } from '../database'
 
 export interface Ruling {
-  id: number
+  id: string
   title: string
   content: string
   userId: number
@@ -18,10 +18,9 @@ export const Ruling = database.define<RulingInstance, RulingCreationAttributes>(
   'Ruling',
   {
     id: {
-      allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
     },
     title: {
       allowNull: false,

@@ -39,7 +39,7 @@ export const rulingsController = {
   getOne: async (request: AuthenticatedRequest, response: Response) => {
     const { id } = request.params
     try {
-      const oneRuling = await rulingService.findById(Number(id))
+      const oneRuling = await rulingService.findById(id)
       if (!response.status(200)) throw new Error('Entendimento não encontrado.')
       return response.status(200).json(oneRuling)
     } catch (error) {
@@ -53,12 +53,12 @@ export const rulingsController = {
     const { id } = request.params
     const { title, content } = request.body
     try {
-      const rulingExists = await rulingService.findById(Number(id))
+      const rulingExists = await rulingService.findById(id)
       if (!rulingExists)
         throw new Error(
           'Não há entendimento cadastrado com o identificador informado.'
         )
-      const updatedRuling = await rulingService.updateById(Number(id), {
+      const updatedRuling = await rulingService.updateById(id, {
         title,
         content,
         userId
@@ -74,13 +74,13 @@ export const rulingsController = {
     const { id } = request.params
 
     try {
-      const rulingExists = await rulingService.findById(Number(id))
+      const rulingExists = await rulingService.findById(id)
       if (!rulingExists)
         throw new Error(
           'Não há entendimento cadastrado com o identificador informado.'
         )
 
-      await rulingService.deleteById(Number(id))
+      await rulingService.deleteById(id)
       return response.status(204).send()
     } catch (error) {
       if (error instanceof Error)

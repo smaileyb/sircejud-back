@@ -6,5 +6,8 @@ export const database = new Sequelize(DATABASE_URL, {
     underscored: true
   },
   ssl: true,
-  dialectModule: require('pg')
+  dialectModule: require('pg'),
+  dialectOptions: {
+    useNativeUUID: true
+  }
 })
