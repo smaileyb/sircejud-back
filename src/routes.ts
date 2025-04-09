@@ -4,6 +4,7 @@ import { authController } from './controllers/authController'
 import { ensureAuthentication } from './middlewares/auth'
 import { userController } from './controllers/userController'
 import { topicsController } from './controllers/TopicsController'
+import { documentsController } from './controllers/DocumentsController'
 
 const router = express.Router()
 
@@ -21,6 +22,7 @@ router.delete(
   topicsController.delete
 )
 
+router.post('/auth', authController.checkEmail)
 router.post('/auth/register', authController.register)
 router.post('/auth/login', authController.login)
 
@@ -32,4 +34,9 @@ router.put(
   userController.updatePassword
 )
 
+router.get('/documents', ensureAuthentication, documentsController.index)
+router.get('/documents/:id', ensureAuthentication, documentsController.getOne)
+
 export { router }
+
+//TODO need to make a new commit regarding the new migration, table, seeds, service, controller and routes
